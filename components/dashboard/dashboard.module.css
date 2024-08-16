@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+}
+
+.menu{
+    flex: 1;
+}
+
+.content{
+    flex:4;
+    /* background-color: var(--bgNavbar); */
+    color: var(--text);
+    padding: 20px;
+}

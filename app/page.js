@@ -1,11 +1,13 @@
 // import Image from "next/image";
 
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 
 export default function Home() {
   return (
-    <div>
-      <Sidebar/>
-    </div>
+    <main>
+      <div>
+        <Sidebar />
+      </div>
+    </main>
   );
 }
