@@ -2,13 +2,13 @@
     display: flex;
 }
 
-.menu{
+.menu {
     flex: 1;
 }
 
 .content{
-    flex:4;
-    /* background-color: var(--bgNavbar); */
+    flex: 5 ;
     color: var(--text);
     padding: 20px;
+    /* background-color: aqua; */
 }
