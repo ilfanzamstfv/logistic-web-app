@@ -25,14 +25,14 @@ const Dashboard = () => {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="/storage">
                 <Button className="flex items-center gap-4 bg-teal-500 text-white hover:bg-teal-700 px-10 py-5 rounded shadow-xl">
                   <FaBoxArchive className="size-12" /> Storage
                 </Button>
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="/pengembalian">
                 <Button className="flex items-center gap-4 bg-teal-500 text-white hover:bg-teal-700 px-10 py-5 rounded shadow-xl">
                   <TbClipboardText className="size-12" /> Form Pengembalian
                 </Button>
