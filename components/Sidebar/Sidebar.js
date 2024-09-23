@@ -1,4 +1,3 @@
-import React from "react";
 import { Disclosure, DisclosureButton } from "@headlessui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -7,7 +6,6 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { FaBoxArchive } from "react-icons/fa6";
 import { LuScanLine } from "react-icons/lu";
 import { TbClipboardText } from "react-icons/tb";
-import { MdLogin } from "react-icons/md";
 
 function Sidebar() {
   return (
@@ -25,9 +23,6 @@ function Sidebar() {
               Eventory
             </h1>
             <div className="my-4 pb-4">
-              <div className="flex mb-2 justify-start p-2 border-b border-white">
-                <h3 className="text-base text-white font-semibold">Pages</h3>
-              </div>
               {/* DASHBOARD */}
               <a href="/dashboard">
                 <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-emerald-800 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
@@ -64,13 +59,6 @@ function Sidebar() {
                   </h3>
                 </div>
               </a>
-              <div className="flex mb-2 mt-6 justify-start p-2 border-b border-white">
-                <h3 className="text-base text-white font-semibold">Privacy</h3>
-              </div>
-              <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-emerald-800 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <MdLogin className="text-2xl text-white group-hover:text-white" />
-                <h3 className="text-base text-white font-normal">Login</h3>
-              </div>
             </div>
           </div>
         </div>

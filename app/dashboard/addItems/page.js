@@ -1,32 +1,39 @@
 "use client";
-import { Button } from "@headlessui/react";
-import Link from "next/link";
+
+import { supabase } from "@/db/supabase";
+import { data } from "autoprefixer";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const addItemsPage = () => {
+
+  const {
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const item = {
+      nama_pic: data.nama_pic,
+      divisi: data.divisi,
+      contact: data.contact,
+      kategori_barang: data.kategori_barang,
+      barang: data.barang,
+      status: data.status,
+      date_barang: data.date_barang,
+      jumlah_barang: data.jumlah_barang,
+      vendor: data.vendor,
+      catatan_barang: data.catatan_barang,
+      foto: data.foto,
+    };
+  }
+
   return (
     <div className="p-4 md:p-8">
       <div className="text-xl font-bold text-black">
         <h1>Add Items</h1>
       </div>
       <div className="mt-10">
-        {/* <div>
-          <ul className="flex flex-wrap">
-            <li>
-              <Link href="/dashboard/addItems">
-                <Button className="flex items-center bg-teal-500 text-white text-base hover:bg-teal-700 px-1 py-2 rounded w-full sm:w-auto">
-                  <div>Barang Beli</div>
-                </Button>
-              </Link>
-            </li>
-            <li>
-              <Link href="/dashboard/addItems">
-                <Button className="flex items-center bg-gray-500 text-white text-base hover:bg-teal-500 px-1 py-2 rounded w-full sm:w-auto">
-                  <div>Barang Sewa</div>
-                </Button>
-              </Link>
-            </li>
-          </ul>
-        </div> */}
         <div className="bg-gray-300 rounded p-4">
           <form>
             <div className="text-lg font-bold text-black p-2 ms-2">
@@ -36,17 +43,13 @@ const addItemsPage = () => {
             <div className="flex flex-wrap gap-4">
               <div className="ms-4 mt-2">
                 {/* NAMA PIC */}
-                <label
-                  for="#namaPIC"
-                  className="block text-base font-medium leading-6 text-gray-900"
-                >
+                <label className="block text-base font-medium leading-6 text-gray-900">
                   Nama PIC
                 </label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="#namaPIC"
-                    id="#namaPIC"
+                    name="nama_pic"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Nama PIC"
                   />
@@ -54,17 +57,13 @@ const addItemsPage = () => {
               </div>
               <div className="ms-4 mt-2">
                 {/* DIVISI */}
-                <label
-                  for="#divisi"
-                  className="block text-base font-medium leading-6 text-gray-900"
-                >
+                <label className="block text-base font-medium leading-6 text-gray-900">
                   Divisi
                 </label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="#divisi"
-                    id="#divisi"
+                    name="divisi"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Divisi"
                   />
@@ -72,17 +71,13 @@ const addItemsPage = () => {
               </div>
               <div className="ms-4 mt-2">
                 {/* NO WHATSAPP */}
-                <label
-                  for="#notelepon"
-                  className="block text-base font-medium leading-6 text-gray-900"
-                >
+                <label className="block text-base font-medium leading-6 text-gray-900">
                   Nomor Telepon/ WhatsApp
                 </label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="#notelepon"
-                    id="#notelepon"
+                    name="contact"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Nomor Telepon"
                   />
@@ -97,17 +92,13 @@ const addItemsPage = () => {
               <div className="flex flex-wrap gap-4">
                 <div className="ms-4 mt-2">
                   {/* KATEGORI BARANG */}
-                  <label
-                    for="#kategori barang"
-                    className="block text-base font-medium leading-6 text-gray-900"
-                  >
+                  <label className="block text-base font-medium leading-6 text-gray-900">
                     Kategori Barang
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="#katbarang"
-                      id="#katbarang"
+                      name="kategori_barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Kategori Barang"
                     />
@@ -115,17 +106,13 @@ const addItemsPage = () => {
                 </div>
                 <div className="ms-4 mt-2">
                   {/* NAMA BARANG */}
-                  <label
-                    for="#namabarang"
-                    className="block text-base font-medium leading-6 text-gray-900"
-                  >
+                  <label className="block text-base font-medium leading-6 text-gray-900">
                     Nama Barang
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="#nmbarang"
-                      id="#nmbarang"
+                      name="barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Nama Barang"
                     />
@@ -133,17 +120,13 @@ const addItemsPage = () => {
                 </div>
                 <div className="ms-4 mt-2">
                   {/* STATUS BARANG */}
-                  <label
-                    for="#statusbarang"
-                    className="block text-base font-medium leading-6 text-gray-900"
-                  >
+                  <label className="block text-base font-medium leading-6 text-gray-900">
                     Status Barang
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="#statusbarang"
-                      id="#statusbarang"
+                      name="status"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Status Barang"
                     />
@@ -151,17 +134,13 @@ const addItemsPage = () => {
                 </div>
                 <div className="ms-4 mt-2">
                   {/* TANGGAL PEMBELIAN */}
-                  <label
-                    for="#tglbeli"
-                    className="block text-base font-medium leading-6 text-gray-900"
-                  >
+                  <label className="block text-base font-medium leading-6 text-gray-900">
                     Tanggal Pembelian Barang
                   </label>
                   <div className="mt-2">
                     <input
                       type="date"
-                      name="#tglbeli"
-                      id="#tglbeli"
+                      name="date_barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     />
                   </div>
@@ -171,17 +150,13 @@ const addItemsPage = () => {
                 <div className="flex flex-wrap gap-4">
                   <div className="ms-4 mt-2">
                     {/* JUMLAH BARANG */}
-                    <label
-                      for="#jumlahbarang"
-                      className="block text-base font-medium leading-6 text-gray-900"
-                    >
+                    <label className="block text-base font-medium leading-6 text-gray-900">
                       Jumlah Barang
                     </label>
                     <div className="mt-2">
                       <input
                         type="number"
-                        name="#jumlahbarang"
-                        id="#jumlahbarang"
+                        name="jumlah_barang"
                         className="block rounded bg-white px-8 py-2 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Masukkan Jumlah Barang"
                       />
@@ -189,17 +164,13 @@ const addItemsPage = () => {
                   </div>
                   <div className="ms-4 mt-2">
                     {/* NAMA VENDOR */}
-                    <label
-                      for="#vendor"
-                      className="block text-base font-medium leading-6 text-gray-900"
-                    >
+                    <label className="block text-base font-medium leading-6 text-gray-900">
                       Nama Vendor
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="#vendor"
-                        id="#vendor"
+                        name="vendor"
                         className="block rounded bg-white px-8 py-2 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Masukkan Nama Vendor"
                       />
@@ -207,17 +178,13 @@ const addItemsPage = () => {
                   </div>
                   <div className="ms-4 mt-2">
                     {/* CATATAN BARANG */}
-                    <label
-                      for="#catatanbarang"
-                      className="block text-base font-medium leading-6 text-gray-900"
-                    >
+                    <label className="block text-base font-medium leading-6 text-gray-900">
                       Catatan Barang
                     </label>
                     <div className="mt-2">
                       <textarea
                         type="text"
-                        name="#catatanbarang"
-                        id="#catatanbarang"
+                        name="catatan_barang"
                         className="block rounded bg-white px-12 py-2 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Masukkan Catatan Barang"
                       />
@@ -229,10 +196,7 @@ const addItemsPage = () => {
                 <div className="flex flex-wrap gap-4">
                   <div className="ms-4">
                     {/* FOTO BARANG */}
-                    <label
-                      for="#fotobarang"
-                      className="block text-base font-medium leading-6 text-gray-900"
-                    >
+                    <label className="block text-base font-medium leading-6 text-gray-900">
                       Foto Bukti Barang
                     </label>
                     <div className="mt-2 rounded bg-white px-16 py-3">
@@ -250,14 +214,10 @@ const addItemsPage = () => {
                           />
                         </svg>
                         <div>
-                          <label
-                            for="file-upload"
-                            className="relative cursor-pointer rounded bg-white font-semibold text-teal-700 hover:text-teal-500"
-                          >
+                          <label className="relative cursor-pointer rounded bg-white font-semibold text-teal-700 hover:text-teal-500">
                             <span>Upload a file</span>
                             <input
-                              id="file-upload"
-                              name="file-upload"
+                              name="foto"
                               type="file"
                               className="sr-only"
                             />
@@ -275,7 +235,7 @@ const addItemsPage = () => {
                 </div>
               </div>
               <div className="mt-5">
-                <div className="flex flex-wrap justify-end">
+                <div className="flex flex-wrap ms-3">
                   {/* BUTTON SUBMIT */}
                   <button
                     type="submit"
