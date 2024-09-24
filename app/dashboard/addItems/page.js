@@ -1,32 +1,48 @@
 "use client";
 
 import { supabase } from "@/db/supabase";
-import { data } from "autoprefixer";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 
 const addItemsPage = () => {
-
   const {
+    register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+
   const onSubmit = async (data) => {
-    const item = {
-      nama_pic: data.nama_pic,
-      divisi: data.divisi,
-      contact: data.contact,
-      kategori_barang: data.kategori_barang,
-      barang: data.barang,
-      status: data.status,
-      date_barang: data.date_barang,
-      jumlah_barang: data.jumlah_barang,
-      vendor: data.vendor,
-      catatan_barang: data.catatan_barang,
-      foto: data.foto,
-    };
-  }
+    try {
+      setLoading(true);
+      const item = {
+        nama_pic: data.nama_pic,
+        divisi: data.divisi,
+        contact: data.contact,
+        kategori_barang: data.kategori_barang,
+        barang: data.barang,
+        status: data.status,
+        date_barang: data.date_barang,
+        jumlah_barang: data.jumlah_barang,
+        vendor: data.vendor,
+        catatan_barang: data.catatan_barang,
+      };
+
+      const { error } = await supabase.from("storage").insert(item);
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      setMessage("Data berhasil disimpan!");
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-4 md:p-8">
@@ -35,7 +51,7 @@ const addItemsPage = () => {
       </div>
       <div className="mt-10">
         <div className="bg-gray-300 rounded p-4">
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="text-lg font-bold text-black p-2 ms-2">
               <h1>Data Pengaju</h1>
               <hr className="border-t-2 border-gray-700 w-full"></hr>
@@ -49,10 +65,15 @@ const addItemsPage = () => {
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="nama_pic"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Nama PIC"
+                    {...register("nama_pic")}
                   />
+                  {errors.nama_pic && (
+                    <span className="text-red-500 text-sm">
+                      Kolom harus diisi
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="ms-4 mt-2">
@@ -63,10 +84,15 @@ const addItemsPage = () => {
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="divisi"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Divisi"
+                    {...register("divisi")}
                   />
+                  {errors.divisi && (
+                    <span className="text-red-500 text-sm">
+                      Kolom harus diisi
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="ms-4 mt-2">
@@ -77,10 +103,15 @@ const addItemsPage = () => {
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="contact"
                     className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     placeholder="Masukkan Nomor Telepon"
+                    {...register("contact")}
                   />
+                  {errors.contact && (
+                    <span className="text-red-500 text-sm">
+                      Kolom harus diisi
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -98,10 +129,15 @@ const addItemsPage = () => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="kategori_barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Kategori Barang"
+                      {...register("kategori_barang")}
                     />
+                    {errors.kategori_barang && (
+                      <span className="text-red-500 text-sm">
+                        Kolom harus diisi
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="ms-4 mt-2">
@@ -112,10 +148,15 @@ const addItemsPage = () => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Nama Barang"
+                      {...register("barang")}
                     />
+                    {errors.barang && (
+                      <span className="text-red-500 text-sm">
+                        Kolom harus diisi
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="ms-4 mt-2">
@@ -126,10 +167,15 @@ const addItemsPage = () => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="status"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       placeholder="Masukkan Status Barang"
+                      {...register("status")}
                     />
+                    {errors.status && (
+                      <span className="text-red-500 text-sm">
+                        Kolom harus diisi
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="ms-4 mt-2">
@@ -140,9 +186,14 @@ const addItemsPage = () => {
                   <div className="mt-2">
                     <input
                       type="date"
-                      name="date_barang"
                       className="block border-0 rounded bg-white px-8 py-1.5 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                      {...register("date_barang")}
                     />
+                    {errors.date_barang && (
+                      <span className="text-red-500 text-sm">
+                        Kolom harus diisi
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -159,7 +210,13 @@ const addItemsPage = () => {
                         name="jumlah_barang"
                         className="block rounded bg-white px-8 py-2 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Masukkan Jumlah Barang"
+                        {...register("jumlah_barang")}
                       />
+                      {errors.jumlah_barang && (
+                        <span className="text-red-500 text-sm">
+                          Kolom harus diisi
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="ms-4 mt-2">
@@ -173,7 +230,13 @@ const addItemsPage = () => {
                         name="vendor"
                         className="block rounded bg-white px-8 py-2 pl-2 text-black placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Masukkan Nama Vendor"
+                        {...register("vendor")}
                       />
+                      {errors.vendor && (
+                        <span className="text-red-500 text-sm">
+                          Kolom harus diisi
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="ms-4 mt-2">
@@ -240,10 +303,14 @@ const addItemsPage = () => {
                   <button
                     type="submit"
                     className="rounded bg-teal-500 hover:bg-teal-700 px-7 py-2 text-sm font-semibold"
+                    disabled={loading}
                   >
-                    Submit
+                    {loading ? "Mengirim..." : "Submit"}
                   </button>
                 </div>
+                {message && (
+                  <div className="mt-4 text-sm text-teal-600">{message}</div>
+                )}
               </div>
             </div>
           </form>
