@@ -17,6 +17,7 @@ const addItemsPage = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+
       const item = {
         nama_pic: data.nama_pic,
         divisi: data.divisi,

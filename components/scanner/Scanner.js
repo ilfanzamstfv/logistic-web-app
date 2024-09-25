@@ -30,7 +30,7 @@ function Scanner() {
   return (
     <div className="justify-center">
       {scanResult ? (
-        <div>
+        <div className="align-middle">
           Success: <a href={scanResult}>{scanResult}</a>
         </div>
       ) : (
