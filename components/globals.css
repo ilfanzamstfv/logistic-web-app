@@ -27,3 +27,5 @@ a{
     text-wrap: wrap;
   }
 }
+
+@layer base {img {display: initial; }}

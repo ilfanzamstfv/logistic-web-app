@@ -20,21 +20,24 @@ const Dashboard = () => {
             <li>
               <Link href="/dashboard/addItems">
                 <Button className="flex items-center gap-4 bg-teal-500 text-white hover:bg-teal-700 px-10 py-5 rounded shadow-xl">
-                  <MdAddBox className="size-12" /> Add Item
+                  <MdAddBox className="size-12" />
+                  <div className="font-semibold"> Add Item </div>
                 </Button>
               </Link>
             </li>
             <li>
               <Link href="/storage">
                 <Button className="flex items-center gap-4 bg-teal-500 text-white hover:bg-teal-700 px-10 py-5 rounded shadow-xl">
-                  <FaBoxArchive className="size-12" /> Storage
+                  <FaBoxArchive className="size-12" />
+                  <div className="font-semibold"> Storage </div>
                 </Button>
               </Link>
             </li>
             <li>
               <Link href="/pengembalian">
                 <Button className="flex items-center gap-4 bg-teal-500 text-white hover:bg-teal-700 px-10 py-5 rounded shadow-xl">
-                  <TbClipboardText className="size-12" /> Form Pengembalian
+                  <TbClipboardText className="size-12" />
+                  <div className="font-semibold"> Form Pengembalian </div>
                 </Button>
               </Link>
             </li>
